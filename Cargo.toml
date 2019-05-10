@@ -1,0 +1,15 @@
+[package]
+name = "flac-tag-split"
+version = "0.1.0"
+authors = ["Simon Persson <simon@flaskpost.me>"]
+edition = "2018"
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = 'abort'
+
+[dependencies]
+metaflac = "0.1.8"
+structopt = "0.2.15"
