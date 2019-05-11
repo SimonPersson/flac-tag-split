@@ -33,7 +33,9 @@ fn main() -> Result<(), metaflac::Error> {
     for file in &args.files {
         let mut tag = Tag::read_from_path(file).unwrap();
         for field in &args.fields {
-            let split_fields = split_option_seq(&tag, field, &*args.delimiter);
+            let mut split_fields = split_option_seq(&tag, field, &*args.delimiter);
+            split_fields.sort_unstable();
+            split_fields.dedup();
             tag.remove_vorbis(field);
             tag.set_vorbis(&**field, split_fields);
             tag.save()?;
