@@ -31,7 +31,7 @@ fn split_option_seq(tag: &Tag, field: &str, delimiter: &str) -> Vec<String> {
 fn main() -> Result<(), metaflac::Error> {
     let args = Args::from_args();
     for file in &args.files {
-        let mut tag = Tag::read_from_path(file).unwrap();
+        let mut tag = Tag::read_from_path(file)?;
         for field in &args.fields {
             let mut split_fields = split_option_seq(&tag, field, &*args.delimiter);
             split_fields.sort_unstable();
